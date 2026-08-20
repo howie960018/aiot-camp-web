@@ -17,6 +17,7 @@ import {
   MapPinned,
   Newspaper,
   MessageSquareMore,
+  PlayCircle,
 } from 'lucide-react';
 
 const navItems = [
@@ -132,6 +133,11 @@ const newsCards = [
   { title: '學生作品成果交流會', category: '活動紀錄', date: '2026.07.22' },
   { title: 'AIoT 在校園中的應用', category: '媒體報導', date: '2026.06.18' },
 ];
+
+const featuredVideo = {
+  title: 'AI 是什麼？2 分鐘看懂人工智慧！AI 偵探帶你大解密',
+  videoId: 'Lb0AgFcqCy0',
+};
 
 export default function HomePage() {
   return (
@@ -257,6 +263,43 @@ export default function HomePage() {
                     <p className="flex items-center text-base text-slate-600">{item}</p>
                   </div>
                 ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-[#f4f9ff] px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 text-center">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-rose-600">AI 科普影音</p>
+              <h3 className="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">用影片認識人工智慧</h3>
+              <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+                透過簡短有趣的科普影片，帶你認識人工智慧如何學習、創作，以及 AI 在日常生活中的多元應用。
+              </p>
+            </div>
+
+            <div className="mx-auto grid max-w-5xl gap-8 overflow-hidden rounded-[30px] border border-slate-200 bg-white p-5 shadow-[0_20px_45px_rgba(15,23,42,0.08)] sm:p-7 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+              <div className="aspect-video overflow-hidden rounded-2xl bg-slate-900">
+                <iframe
+                  className="h-full w-full"
+                  src={`https://www.youtube-nocookie.com/embed/${featuredVideo.videoId}`}
+                  title={featuredVideo.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
+              <div className="px-1 py-2 lg:px-3">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-100 text-rose-600">
+                  <PlayCircle className="h-6 w-6" />
+                </div>
+                <p className="mb-2 text-xs font-bold uppercase tracking-[0.16em] text-rose-600">精選影片</p>
+                <h4 className="text-2xl font-black leading-tight text-slate-900">{featuredVideo.title}</h4>
+                <a
+                  href="/learn#ai-science-videos"
+                  className="mt-6 inline-flex items-center justify-center rounded-2xl bg-[#1E6091] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#174d76]"
+                >
+                  觀看更多科普影片
+                </a>
               </div>
             </div>
           </div>

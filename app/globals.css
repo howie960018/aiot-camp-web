@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "jf-openhuninn";
+  src: url("/jf-openhuninn-2.1.ttf") format("truetype");
+  font-display: swap;
+}
+
 @layer base {
   :root {
     --primary: #1e6091;
@@ -22,7 +28,7 @@
   body {
     background: var(--bg-light);
     color: var(--body-text);
-    font-family: var(--font-geist-sans), "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+    font-family: "jf-openhuninn", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
   }
 
   a {

@@ -1,4 +1,4 @@
-import { ArrowRight, BrainCircuit, Cpu, Database, Gauge, Lightbulb, Microscope, ShieldCheck, Sparkles, Waves } from 'lucide-react';
+import { ArrowRight, BrainCircuit, Cpu, Database, Gauge, Lightbulb, Microscope, PlayCircle, ShieldCheck, Sparkles, Waves } from 'lucide-react';
 import { MainNav } from '../../components/MainNav';
 
 const conceptCards = [
@@ -62,6 +62,13 @@ const apps = [
   '智慧農業：觀察溫度、土壤與濕度狀態',
   '智慧校園：管理教室環境與設備安全',
   '智慧城市：監測交通與環境數據',
+];
+
+const scienceVideos = [
+  { title: 'AIoT 是什麼？一起認識人工智慧與物聯網', videoId: 'asbccpdJlrA' },
+  { title: 'AI 如何學習？從資料到智慧判斷', videoId: 'SgDc0r0994E' },
+  { title: 'AI 是什麼？2 分鐘看懂人工智慧！AI 偵探帶你大解密', videoId: 'Lb0AgFcqCy0' },
+  { title: 'AI 在生活中的多元應用', videoId: 'ziGk4AkKMBg' },
 ];
 
 export default function LearnPage() {
@@ -197,6 +204,38 @@ export default function LearnPage() {
                   </div>
                   <p className="text-sm leading-relaxed text-slate-600">{app}</p>
                 </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="ai-science-videos" className="bg-rose-50/70 px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 text-center">
+              <p className="text-sm font-bold uppercase tracking-[0.2em] text-rose-600">AI 科普影音</p>
+              <h3 className="mt-4 text-3xl font-black text-slate-900 sm:text-4xl">用影片認識人工智慧</h3>
+              <p className="mx-auto mt-4 max-w-3xl text-base leading-relaxed text-slate-600">
+                透過簡短有趣的科普影片，帶你認識人工智慧如何學習、創作，以及 AI 在日常生活中的多元應用。
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              {scienceVideos.map((video) => (
+                <article key={video.videoId} className="overflow-hidden rounded-[28px] border border-slate-200 bg-white p-4 shadow-[0_18px_36px_rgba(15,23,42,0.06)] sm:p-5">
+                  <div className="aspect-video overflow-hidden rounded-2xl bg-slate-900">
+                    <iframe
+                      className="h-full w-full"
+                      src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                  <div className="mt-5 flex items-start gap-3">
+                    <PlayCircle className="mt-0.5 h-5 w-5 shrink-0 text-rose-600" />
+                    <h4 className="text-lg font-black leading-relaxed text-slate-900">{video.title}</h4>
+                  </div>
+                </article>
               ))}
             </div>
           </div>

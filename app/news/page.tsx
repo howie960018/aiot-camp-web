@@ -1,4 +1,7 @@
-import { ArrowRight, CalendarDays, ChevronRight, Newspaper, Rocket, Tag } from 'lucide-react';
+'use client';
+
+import { CalendarDays, ChevronRight, Newspaper, Tag } from 'lucide-react';
+import { useState } from 'react';
 import { MainNav } from '../../components/MainNav';
 
 const categories = ['全部', '活動紀錄', '媒體報導'];
@@ -30,7 +33,37 @@ const newsItems = [
   },
 ];
 
+const mediaReports = [
+  {
+    title: '國北教大攜手更寮國小引進AI資源',
+    source: '偏鄉學童開啟科技視窗',
+    url: 'https://news.ltn.com.tw/news/life/breakingnews/5335341',
+  },
+  {
+    title: '月美國小',
+    source: '月美國小與國立臺北教育大學兩天AIoT體驗營',
+    url: 'https://www.taiwantimes.com.tw/app-container/app-content/new/new-content-detail?blogId=blog-1d3c905d-8504-466f-a177-cc93650ceda2&currentCategory=101',
+  },
+  {
+    title: 'AIoT進山城點亮科技夢-月美國小兩天營隊翻轉學習視野',
+    source: 'AIoT進山城點亮科技夢',
+    url: 'https://www.youngnews3631.com/news_detail.php?NewsID=13582',
+  },
+  {
+    title: '瑞芳區鼻頭國小攜手臺北教育大學舉辦AIoT推廣科學營',
+    source: '攜手臺北教育大學舉辦AIoT推廣科學營',
+    url: 'https://udn.com/news/story/6898/9321779',
+  },
+  {
+    title: '台北市博嘉國小',
+    source: '博嘉國小',
+    url: 'https://www.youtube.com/watch?v=IYEr4zUhd5k',
+  },
+];
+
 export default function NewsPage() {
+  const [activeCategory, setActiveCategory] = useState('全部');
+
   return (
     <main className="min-h-screen bg-[linear-gradient(180deg,#f7fbff_0%,#f2f7ff_100%)] text-slate-700">
       <MainNav current="news" ctaHref="/contact" ctaLabel="聯絡我們" />
@@ -52,8 +85,10 @@ export default function NewsPage() {
               {categories.map((category) => (
                 <button
                   key={category}
+                  type="button"
+                  onClick={() => setActiveCategory(category)}
                   className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
-                    category === '全部'
+                    category === activeCategory
                       ? 'bg-[#1E6091] text-white shadow-lg shadow-sky-200'
                       : 'bg-white text-slate-600 ring-1 ring-slate-200 hover:bg-slate-50'
                   }`}
@@ -63,33 +98,70 @@ export default function NewsPage() {
               ))}
             </div>
 
-            <div className="grid gap-6 lg:grid-cols-2">
-              {newsItems.map((news) => (
-                <article key={news.title} className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_18px_36px_rgba(15,23,42,0.05)]">
-                  <div className="mb-4 flex flex-wrap items-center justify-between gap-3 text-xs font-bold uppercase tracking-[0.12em] text-sky-600">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1.5 text-sky-700">
-                      <Tag className="h-3.5 w-3.5" />
-                      {news.category}
-                    </span>
-                    <span className="inline-flex items-center gap-2 text-slate-400">
-                      <CalendarDays className="h-3.5 w-3.5" />
-                      {news.date}
-                    </span>
-                  </div>
+            {activeCategory === '媒體報導' ? (
+              <div className="overflow-x-auto rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_36px_rgba(15,23,42,0.05)]">
+                <table className="w-full min-w-[720px] border-collapse text-left">
+                  <caption className="px-6 py-5 text-left text-2xl font-black text-slate-900">
+                    AIOT新聞稿
+                  </caption>
+                  <thead className="bg-sky-50 text-sm font-bold text-slate-700">
+                    <tr>
+                      <th scope="col" className="w-24 px-6 py-4">項次</th>
+                      <th scope="col" className="px-6 py-4">來源單位</th>
+                      <th scope="col" className="px-6 py-4">發佈網址</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {mediaReports.map((report, index) => (
+                      <tr key={report.url} className="align-top transition hover:bg-slate-50">
+                        <td className="px-6 py-5 text-sm font-bold text-slate-500">{index + 1}</td>
+                        <td className="px-6 py-5 font-semibold leading-relaxed text-slate-800">{report.title}</td>
+                        <td className="px-6 py-5">
+                          <a
+                            href={report.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-semibold leading-relaxed text-sky-700 underline decoration-sky-200 underline-offset-4 transition hover:text-sky-900"
+                          >
+                            {report.source}
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ) : (
+              <div className="grid gap-6 lg:grid-cols-2">
+                {newsItems
+                  .filter((news) => activeCategory === '全部' || news.category === activeCategory)
+                  .map((news) => (
+                    <article key={news.title} className="rounded-[28px] border border-slate-200 bg-white p-6 shadow-[0_18px_36px_rgba(15,23,42,0.05)]">
+                      <div className="mb-4 flex flex-wrap items-center justify-between gap-3 text-xs font-bold uppercase tracking-[0.12em] text-sky-600">
+                        <span className="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3 py-1.5 text-sky-700">
+                          <Tag className="h-3.5 w-3.5" />
+                          {news.category}
+                        </span>
+                        <span className="inline-flex items-center gap-2 text-slate-400">
+                          <CalendarDays className="h-3.5 w-3.5" />
+                          {news.date}
+                        </span>
+                      </div>
 
-                  <h3 className="mb-3 text-2xl font-black text-slate-900">{news.title}</h3>
-                  <p className="text-sm leading-relaxed text-slate-600">{news.summary}</p>
+                      <h3 className="mb-3 text-2xl font-black text-slate-900">{news.title}</h3>
+                      <p className="text-sm leading-relaxed text-slate-600">{news.summary}</p>
 
-                  <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
-                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700">
-                      <Newspaper className="h-4 w-4" />
-                      閱讀詳情
-                    </span>
-                    <ChevronRight className="h-4 w-4 text-slate-400" />
-                  </div>
-                </article>
-              ))}
-            </div>
+                      <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-4">
+                        <span className="inline-flex items-center gap-2 text-sm font-semibold text-sky-700">
+                          <Newspaper className="h-4 w-4" />
+                          閱讀詳情
+                        </span>
+                        <ChevronRight className="h-4 w-4 text-slate-400" />
+                      </div>
+                    </article>
+                  ))}
+              </div>
+            )}
           </div>
         </section>
       </main>

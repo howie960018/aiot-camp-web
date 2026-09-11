@@ -182,7 +182,7 @@ export default function ContactPage() {
                   </div>
                   <iframe
                     title="國立臺北教育大學地圖"
-                    src="https://www.google.com/maps?q=%E5%9C%8B%E7%AB%8B%E8%87%BA%E5%8C%97%E6%95%99%E8%82%B2%E5%A4%A7%E5%AD%B8&output=embed"
+                    src="https://www.google.com/maps?q=%E5%9C%8B%E7%AB%8B%E8%87%BA%E5%8C%97%E6%95%99%E8%82%B2%E5%A4%A7%E5%AD%B8&hl=zh-TW&output=embed"
                     className="h-[280px] w-full border-0"
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"

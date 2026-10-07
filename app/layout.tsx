@@ -1,15 +1,34 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, SITE_URL } from "../lib/seo";
 
 export const metadata: Metadata = {
-  title: "未來科技啟航：AIoT 推廣科學營",
-  description: "動手玩科技，打造會感受、會判斷、會反應的智慧生活！國科會大眾科學教育計畫。",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: HOME_TITLE,
+    template: `%s｜${SITE_NAME}`,
+  },
+  description: HOME_DESCRIPTION,
+  applicationName: SITE_NAME,
+  openGraph: {
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: "/",
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "zh_TW",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang="zh-Hant-TW"
       data-scroll-behavior="smooth"
       className="h-full antialiased"
     >

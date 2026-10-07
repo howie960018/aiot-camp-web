@@ -1,6 +1,14 @@
 import Image from 'next/image';
 import { Award, BookOpen, CalendarRange, Camera, Globe2, Newspaper, Sparkles, Users } from 'lucide-react';
 import { MainNav } from '../../components/MainNav';
+import { pageMetadata } from '../../lib/seo';
+
+export const metadata = pageMetadata({
+  title: '活動成果',
+  description:
+    'AIoT 推廣科學營活動成果：體驗營、探索營、科普營的營隊紀錄，國小學生的智慧牙刷與 Micro:bit 智慧家庭作品，以及公開展覽與各縣市推廣足跡。國北教大執行、國科會指導。',
+  path: '/programs',
+});
 
 const programs = [
   {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { MainNav } from '../components/MainNav';
+import { HOME_DESCRIPTION, HOME_TITLE, SITE_NAME, SITE_URL, pageMetadata } from '../lib/seo';
 import {
   ArrowRight,
   Cpu,
@@ -139,9 +140,46 @@ const featuredVideo = {
   videoId: 'Lb0AgFcqCy0',
 };
 
+export const metadata = pageMetadata({
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  path: '/',
+});
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'EducationalOrganization',
+  name: SITE_NAME,
+  url: SITE_URL,
+  logo: `${SITE_URL}/National_Taipei_University_of_Education_logo.svg.webp`,
+  description: HOME_DESCRIPTION,
+  parentOrganization: {
+    '@type': 'CollegeOrUniversity',
+    name: '國立臺北教育大學',
+    url: 'https://www.ntue.edu.tw/',
+    address: {
+      '@type': 'PostalAddress',
+      postalCode: '10671',
+      addressRegion: '臺北市',
+      addressLocality: '大安區',
+      streetAddress: '和平東路二段134號',
+      addressCountry: 'TW',
+    },
+  },
+  funder: {
+    '@type': 'GovernmentOrganization',
+    name: '國家科學及技術委員會',
+    url: 'https://www.nstc.gov.tw/',
+  },
+};
+
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(119,171,255,0.18),_transparent_38%),linear-gradient(180deg,#f7fbff_0%,#f4f8ff_100%)] text-slate-700">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd).replace(/</g, '\\u003c') }}
+      />
       <MainNav current="home" ctaHref="/about" ctaLabel="立即探索" />
 
       <main>

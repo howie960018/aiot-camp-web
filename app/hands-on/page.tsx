@@ -1,5 +1,13 @@
 import { ArrowRight, Blocks, Bot, Cable, Cpu, Lightbulb, Mic, Rocket, Sparkles, Wrench } from 'lucide-react';
 import { MainNav } from '../../components/MainNav';
+import { pageMetadata } from '../../lib/seo';
+
+export const metadata = pageMetadata({
+  title: 'AIoT 動手玩',
+  description:
+    'AIoT 科學營三大實作主題：智慧牙刷以感測器分析刷牙動作、AI 姿勢辨識訓練影像模型、Micro:bit 智慧家庭控制燈光與警示，帶國小學生從發現問題、訓練模型到完成作品。國北教大 × 國科會。',
+  path: '/hands-on',
+});
 
 const steps = [
   {

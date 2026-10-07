@@ -1,5 +1,13 @@
 import { ArrowRight, BrainCircuit, Cpu, Database, Gauge, Lightbulb, Microscope, PlayCircle, ShieldCheck, Sparkles, Waves } from 'lucide-react';
 import { MainNav } from '../../components/MainNav';
+import { pageMetadata } from '../../lib/seo';
+
+export const metadata = pageMetadata({
+  title: '認識 AIoT',
+  description:
+    '認識 AI 與物聯網（IoT）如何結合成 AIoT：從感測、判斷到反應的運作流程，到智慧家庭、健康照護、交通等生活應用，搭配 AI 科普影片，讓國小學生輕鬆理解未來科技。國北教大 × 國科會科學營。',
+  path: '/learn',
+});
 
 const conceptCards = [
   {

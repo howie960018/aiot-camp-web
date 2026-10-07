@@ -1,5 +1,13 @@
 import { ArrowRight, BadgeCheck, BookOpen, Building2, Globe2, Lightbulb, MapPinned, Rocket, Sparkles, Users } from 'lucide-react';
 import { MainNav } from '../../components/MainNav';
+import { pageMetadata } from '../../lib/seo';
+
+export const metadata = pageMetadata({
+  title: '關於計畫',
+  description:
+    '國北教大執行之國科會大眾科學教育計畫，說明 AIoT 推廣科學營的計畫緣起與目標，以體驗、探究、科普、創造四階段學習模式，帶國小學生走進 AI 與物聯網，並深入新北、桃園、宜蘭、新竹、南投、金門等縣市推廣。',
+  path: '/about',
+});
 
 const values = [
   {

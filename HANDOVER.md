@@ -1,7 +1,8 @@
 # AIoT 推廣科學營網站：交接文件
 
-> 給接手維護的學弟妹。看完這份文件，你應該可以把網站跑起來、改內容、上線新版本。
-> 標 **【待補】** 的地方要請交接人（學長姐）填寫或當面交代。
+> 給接手維護的學弟妹。看完這份文件應該可以把網站跑起來、改內容、上線新版本。
+>
+> 現在線上的網站在前任維護者個人帳號底下，你們沒有權限更新它。**若要接手，請先照 [第 8 節](#8-接手建立你們自己的網站) 建立你們自己的網站**，所有需要的東西都寫在文件。
 
 ---
 
@@ -9,8 +10,9 @@
 
 「未來科技啟航：AIoT 推廣科學營」的宣傳網站。這是國立臺北教育大學執行的國科會大眾科學教育計畫，計畫主持人是吳佳娣助理教授。
 
-- 正式網址：<https://aiot-camp-web.vercel.app>
-- 原始碼：<https://github.com/howie960018/aiot-camp-web>
+- 原本的網址：<https://aiot-camp-web.vercel.app>（前任維護者的帳號，不再更新）
+- 原本的原始碼：<https://github.com/howie960018/aiot-camp-web>（公開 repo，任何人都能下載）
+- 你們的新網址、新 repo：照第 8 節建好之後，請回來把這兩行改掉。
 - 網站是**純靜態**的：沒有資料庫、沒有後台、沒有登入。所有文字和圖片都直接寫在程式碼裡，要改內容就得改程式碼，再重新部署。
 
 ## 2. 技術棧
@@ -35,7 +37,7 @@ Tailwind v4 **沒有** `tailwind.config.js`，設定和全站色票都寫在 `ap
 - Git
 
 ```bash
-git clone https://github.com/howie960018/aiot-camp-web.git
+git clone https://github.com/howie960018/aiot-camp-web.git   # 照第 8 節建好自己的 repo 後，改 clone 你們的
 cd aiot-camp-web
 npm install        # 安裝套件，只有第一次或 package.json 有變動時才需要
 npm run dev        # 開發模式，打開 http://localhost:3000
@@ -170,7 +172,7 @@ export const metadata = pageMetadata({
 
 `app/globals.css` 的 `:root`。主色是 `#1E6091`。注意：很多元件直接把顏色寫在 class 裡（例如 `bg-[#1E6091]`），改主色時要全專案搜尋一起換。
 
-## 6. 容易踩的坑
+## 6. 目前的問題
 
 1. **頁尾（footer）在 7 個頁面各複製了一份。** 改頁尾的連結或版權年份時，`app/page.tsx` 和 `app/*/page.tsx` 每個檔案都要改。建議有空時抽成 `components/SiteFooter.tsx`。
 
@@ -188,30 +190,101 @@ export const metadata = pageMetadata({
 
 ## 7. 部署（上線）
 
-網站部署在 Vercel，正常流程是：
+照第 8 節把自己的 Vercel 專案建好之後，正常流程是：
 
 ```
 改程式 → npm run build 確認能過 → git commit → git push 到 main → Vercel 自動部署（約 1～2 分鐘）
 ```
 
+Vercel 匯入 GitHub repo 後，預設就會在每次 push 到 main 時自動部署，不用另外設定。
+
 部署失敗時，到 Vercel 後台的 Deployments 頁面看錯誤訊息。大部分的錯誤在本機跑 `npm run build` 就會出現。
 
-> **【待補】** 請學長姐確認：Vercel 專案是綁在哪個帳號？push 到 main 是否確實會自動部署？
+## 8. 接手：建立你們自己的網站
 
-## 8. 帳號與權限交接清單
+### 為什麼要重建
 
-以下權限目前都在學長姐的個人帳號底下，交接時要轉移，或加學弟妹為協作者：
+原本的 GitHub repo、Vercel 專案、Google Search Console 都在前任維護者的個人帳號底下，他在當兵中因此較難聯絡，**沒辦法把權限轉給你們**。
 
-| 項目 | 目前狀態 | 交接方式 |
-| --- | --- | --- |
-| GitHub repo | `howie960018/aiot-camp-web` | Settings → Collaborators 加人，或 Transfer 給實驗室 / 學弟妹 |
-| Vercel 專案 | **【待補】** | 邀請成員，或 Transfer Project |
-| Google Search Console | 驗證碼寫在 `app/layout.tsx` 的 `verification.google` | 在 Search Console「設定 → 使用者和權限」新增擁有者。**不要刪除那行驗證碼**，刪了會失去網站驗證 |
-| 網域 | 目前使用 Vercel 免費網域 `*.vercel.app` | 若日後改用自訂網域，要同步修改 `lib/seo.ts` 的 `SITE_URL` |
+至少github程式碼公開，可重新創建完成，唯獨**網址會換掉**（無法原本的 `aiot-camp-web.vercel.app` ）。
 
-> 建議：把 repo 和 Vercel 轉到實驗室或計畫的共用帳號，以後交接就不用再搬一次。
+### 第 0 步：請老師建立計畫共用帳號（強烈建議）
 
-## 9. 已知待辦（有空可以做）
+**不要用你自己的個人帳號建。** 不然等你畢業，下一屆又要重建一次、網址又換一次。
+
+請老師建立一個計畫專用的 Google 帳號（例如 `aiot.camp.ntue@gmail.com`），**密碼和手機驗證由老師保管**。接著用這個帳號：
+
+1. 註冊 [GitHub](https://github.com/signup)（用這個 Gmail 註冊）
+2. 註冊 [Vercel](https://vercel.com/signup)（選「Continue with GitHub」，用上面那個 GitHub 帳號登入）
+3. 之後的 Google Search Console 也用這個 Google 帳號
+
+以後每一屆交接，只要老師把帳號密碼交給新的負責人就好，網址永遠不用再換。
+
+### 第 1 步：把程式碼搬到新的 GitHub 帳號
+
+先用共用 GitHub 帳號在 GitHub 上建立一個**空的** repo（例如 `aiot-camp-web`，不要勾選「Add a README」），然後：
+
+```bash
+git clone https://github.com/howie960018/aiot-camp-web.git
+cd aiot-camp-web
+git remote set-url origin https://github.com/<共用帳號>/aiot-camp-web.git
+git push -u origin main
+```
+
+這樣會帶走完整的修改紀錄，而且跟原本的 repo 完全脫鉤（用 Fork 也可以，但 repo 上會一直掛著「forked from howie960018」）。
+
+### 第 2 步：在 Vercel 部署
+
+1. 登入 Vercel → **Add New… → Project**
+2. 選剛剛的 `aiot-camp-web` repo → **Import**
+3. 設定都不用改（Vercel 會自動認出 Next.js）→ **Deploy**
+4. 完成後會拿到一個網址，例如 `https://aiot-camp-web-xxxx.vercel.app`
+   - 想要好記一點的網址：到專案的 **Settings → Domains**，可以改成其他還沒被用掉的 `xxx.vercel.app`，例如 `ntue-aiot-camp.vercel.app`
+
+### 第 3 步：把程式裡的網址改成新網址
+
+改 `lib/seo.ts` 的 `SITE_URL`：
+
+```ts
+export const SITE_URL = 'https://你們的新網址.vercel.app';
+```
+
+**一定要改。** 不改的話，sitemap、分享到 FB / LINE 的預覽圖、給 Google 的網址都會指回舊網站。
+
+### 第 4 步：設定 Google Search Console
+
+1. 用共用 Google 帳號打開 [Google Search Console](https://search.google.com/search-console) → **新增資源** → 選右邊的「**網址前置字元**」→ 輸入新網址
+2. 驗證方式選「**HTML 標記**」，會拿到一段 `<meta name="google-site-verification" content="一串亂碼" />`
+3. 把 `app/layout.tsx` 裡 `verification.google` 的值換成那串亂碼（只要 `content` 引號裡的部分）：
+
+   ```ts
+   verification: {
+     google: "你們拿到的那串亂碼",
+   },
+   ```
+
+4. 把第 3、4 步的修改 commit、push，等 Vercel 部署完（1～2 分鐘）
+5. 回 Search Console 按「**驗證**」
+6. 驗證成功後，左側選單 **Sitemap** → 輸入 `sitemap.xml` → 提交
+
+### 第 5 步：收尾
+
+- [ ] 更新這份文件第 1 節和 `README.md` 裡的網址、repo 連結
+- [ ] 通知計畫團隊新網址，把各處的舊連結換掉（學校網站、簡報、宣傳品、QR code……）
+- [ ] 把本節開頭的「第 0 步」做完了沒？共用帳號的密碼確定在老師那裡？
+- [ ] 確認新網站正常運行後，寄 email 告知前任維護者（howie960018@gmail.com），附上新網址
+
+### 關於舊網站
+
+`aiot-camp-web.vercel.app` 會暫時繼續留在線上，但**內容不會再更新**。等接手的學弟妹建立好新網站、確定可以正常運行之後，**請寄 email 告知前任維護者 howie960018@gmail.com**（附上新網址），他會再關閉舊的網站。Google 也會慢慢改成搜尋到新網站，大約需要幾週。
+
+舊網站關閉後，所有指向舊網址的連結都會失效，所以第 5 步「把各處的舊連結換掉」一定要在那之前做完。
+
+### 以後要換網域
+
+如果日後改用自訂網域（例如學校的子網域），在 Vercel 的 Settings → Domains 新增後，同樣要改 `lib/seo.ts` 的 `SITE_URL`，並在 Search Console 新增一個資源（照第 4 步再做一次）。
+
+## 9. 有空可以做
 
 - [ ] 合作洽詢表單串接真正的寄送服務（見第 6 節第 2 點）
 - [ ] 把 7 份重複的頁尾抽成共用元件
@@ -219,11 +292,13 @@ export const metadata = pageMetadata({
 - [ ] 和計畫團隊確認最新消息（`newsItems`）、活動紀錄（`programs/page.tsx` 的 `records`、`media`）是不是真實資料。如果是建站時放的示意內容，要換掉
 - [ ] 清掉 `npm run lint` 的 warning（未使用的 import、`<img>` 改用 `next/image`）
 - [ ] 建立隱私權說明頁
-- [ ] 把 `README.md` 換成專案說明（目前還是 create-next-app 的預設內容）
+- [x] 把 `README.md` 換成專案說明（目前還是 create-next-app 的預設內容）
 
 ## 10. 聯絡人
 
 | 角色 | 姓名 | 聯絡方式 |
 | --- | --- | --- |
-| 前任維護者 | **【待補】** | **【待補】** |
-| 計畫主持人 | 吳佳娣助理教授 | **【待補】** |
+| 計畫主持人 | 吳佳娣助理教授 | 國立臺北教育大學 |
+| 前任維護者 | 曾浩儀 | 當兵中較難聯絡 howie960018@gmail.com |
+
+

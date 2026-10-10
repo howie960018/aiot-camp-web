@@ -1,38 +1,49 @@
-> 📘 接手維護請先看 [HANDOVER.md](HANDOVER.md)（交接文件）。
+# 未來科技啟航：AIoT 推廣科學營｜宣傳網站
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+國立臺北教育大學執行的國科會大眾科學教育計畫「未來科技啟航：AIoT 推廣科學營」的宣傳網站，介紹計畫內容、AIoT 科普知識、各校活動成果與最新消息。
 
-## Getting Started
+- 網址：<https://aiot-camp-web.vercel.app>（舊網站，內容不會再更新；新網站上線後會關閉）
+- 計畫主持人：吳佳娣助理教授
 
-First, run the development server:
+> 📘 **接手維護請先看 [HANDOVER.md](HANDOVER.md)**：需要重新部署一個你們自己的網站，步驟見 [第 8 節](HANDOVER.md#8-接手建立你們自己的網站)。
+
+## 技術棧
+
+- [Next.js](https://nextjs.org) 16.3（App Router）＋ React 19 ＋ TypeScript
+- [Tailwind CSS](https://tailwindcss.com) v4（沒有 `tailwind.config.js`，設定寫在 `app/globals.css`）
+- [lucide-react](https://lucide.dev/icons/) 圖示
+- 字型：jf open 粉圓（SIL OFL）
+- 部署：Vercel
+
+網站是純靜態的，沒有資料庫或後台，所有內容都寫在程式碼裡。
+
+⚠️ Next.js 16 與網路上多數舊版教學不同，請以 `node_modules/next/dist/docs/` 內的官方文件為準。
+
+## 本機開發
+
+需要 Node.js 20 以上。
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install      # 安裝套件
+npm run dev      # 開發模式：http://localhost:3000
+npm run build    # 正式打包，push 前先確認能過
+npm run lint     # 程式碼檢查
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 頁面
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| 網址 | 檔案 | 內容 |
+| --- | --- | --- |
+| `/` | `app/page.tsx` | 首頁 |
+| `/about` | `app/about/page.tsx` | 關於計畫 |
+| `/learn` | `app/learn/page.tsx` | 認識 AIoT（科普影片） |
+| `/hands-on` | `app/hands-on/page.tsx` | AIoT 動手玩 |
+| `/programs` | `app/programs/page.tsx` | 活動成果（各校照片牆） |
+| `/news` | `app/news/page.tsx` | 最新消息、媒體報導 |
+| `/contact` | `app/contact/page.tsx` | 聯絡我們 |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+共用元件在 `components/`，SEO 設定在 `lib/seo.ts`，圖片與字型在 `public/`。完整的資料夾說明見 [HANDOVER.md](HANDOVER.md#4-資料夾結構)。
 
-## Learn More
+## 部署
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+部署在 Vercel，push 到 `main` 後自動部署。接手時要先建立自己的 Vercel 專案，詳見 [HANDOVER.md](HANDOVER.md#8-接手建立你們自己的網站)。
